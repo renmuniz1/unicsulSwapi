@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>TESTE APLICAÇÃO</title>
+</h:head>
+<h:body>
+	<h:form id="formulario" style="margin: 10px 120px 10px 120px">
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+		<p:panel header="Planos de vôo Intergalático" style="width:1000px">
+			<h:panelGrid columns="2">
+				<p:outputPanel>
+					<h:panelGrid columns="1" cellpadding="5" cellspacing="5">
+						<p:outputPanel>
+							<p:outputLabel value="Passageiros" for="pessoas"/>
+							<p:selectManyMenu id="pessoas" value="#{swapiUnicsulBean.selecionados}" converter="pessoaConverter" >
+								<f:selectItems value="#{swapiUnicsulBean.personagens}" var="p" itemLabel="#{p.name}" itemValue="#{p}"/>
+							</p:selectManyMenu>
+						</p:outputPanel>
+		
+						<p:outputPanel>
+							<p:outputLabel value="Nave" for="naves"/><br />
+							<p:selectOneMenu id="naves" value="#{swapiUnicsulBean.nave}" converter="naveConverter">
+								<f:selectItems value="#{swapiUnicsulBean.naves}" var="n" itemLabel="#{n.name}" itemValue="#{n}"/>
+							</p:selectOneMenu>
+						</p:outputPanel>
+		
+						<p:outputPanel>
+							<p:outputLabel value="Planeta" for="planetas"/><br />
+							<p:selectOneMenu id="planetas" value="#{swapiUnicsulBean.planeta}" converter="planetaConverter">
+								<f:selectItems value="#{swapiUnicsulBean.planetas}" var="pl" itemLabel="#{pl.name}" itemValue="#{pl}"/>
+							</p:selectOneMenu>
+						</p:outputPanel>
+					</h:panelGrid>
+				</p:outputPanel>
+		
+				<p:outputPanel style="width:650px">
+					<p:accordionPanel>
+						<p:tab title="Passageiros">
+            				<p:dataTable var="selecionado" emptyMessage="Sem informações" value="#{swapiUnicsulBean.selecionadosUtilizados}" scrollable="true" scrollHeight="150">
+								<p:column headerText="Nome">
+        							<h:outputText value="#{selecionado.name}" />
+    							</p:column>
+    		
+    							<p:column headerText="Genero">
+        							<h:outputText value="#{selecionado.gender}" />
+    							</p:column>
+			
+							</p:dataTable>
+        				</p:tab>
+        				<p:tab title="Nave">
+        					<p:dataTable var="selecionado" emptyMessage="Sem informações" value="#{swapiUnicsulBean.navesSelecionadas}">
+								<p:column headerText="Nome">
+        							<h:outputText value="#{selecionado.name}" />
+    							</p:column>
+    		
+    							<p:column headerText="Modelo">
+        							<h:outputText value="#{selecionado.model}" />
+    							</p:column>
+    					
+    							<p:column headerText="Passageiros">
+        							<h:outputText value="#{selecionado.passengers}" />
+    							</p:column>
+							</p:dataTable>
+        				</p:tab>
+        		
+        				<p:tab title="Planeta">
+        		
+        					<p:dataTable var="selecionado" emptyMessage="Sem informações" value="#{swapiUnicsulBean.planetasSelecionados}">
+								<p:column headerText="Nome">
+        							<h:outputText value="#{selecionado.name}" />
+    							</p:column>
+    		
+    							<p:column headerText="Diametro">
+        							<h:outputText value="#{selecionado.diameter}" />
+    							</p:column>
+    					
+    							<p:column headerText="Clima">
+        							<h:outputText value="#{selecionado.climate}" />
+    							</p:column>
+    					
+    							<p:column headerText="Terreno">
+        							<h:outputText value="#{selecionado.terrain}" />
+    							</p:column>
+    					
+    							<p:column headerText="População">
+        							<h:outputText value="#{selecionado.population}" />
+    							</p:column>
+							</p:dataTable>
+        				</p:tab>
+					</p:accordionPanel>
+				</p:outputPanel>
+			</h:panelGrid>
+			<p:commandButton actionListener="#{swapiUnicsulBean.acao}" value="Planejar" update="formulario"/>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
